@@ -1,0 +1,79 @@
+<!-- <div>{{ifShow['v']}}</div> -->
+<div style="display: flex;">
+    <div class="drag-box">
+        <div class="component-list-module view-background">
+            <div class="component-item" *ngFor="let item of dragList;index as i" >
+             <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+                {{item.name}}
+         </div>
+            <!-- <div class="component-item">
+                <i nz-icon nzType="down-square" nzTheme="outline"></i>
+                Dropdown
+            </div>
+            <div class="component-item">
+                <i nz-icon nzType="font-size" nzTheme="outline"></i>
+                Input
+            </div> -->
+        </div>
+        <div class="component-list-module"
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="dragList"
+        [cdkDropListConnectedTo]="[doneList]"
+         (cdkDragDropped)="dragDropped($event)"
+         >
+         <div class="component-item" [id]="item.name" *ngFor="let item of dragList;index as i" 
+         cdkDrag
+         (cdkDragExited)="dragExited($event,item.name,i)">
+             <i nz-icon [nzType]="item.icon" nzTheme="outline"></i>
+                {{item.name}}
+         </div>
+            <!-- <div class="component-item" id="dropdown" cdkDrag>
+                Dropdown
+            </div>
+            <div class="component-item" id="input" cdkDrag>
+                <i nz-icon nzType="font-size" nzTheme="outline"></i>
+                Input
+            </div> -->
+        </div>
+    </div>
+    
+    
+    <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="done-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done;index as i" cdkDrag>
+            <div [ngSwitch]="item.name" class="item-box" [ngClass]="selected == i?'selected-item':''" (click)="select(item,i)">
+                <div *ngSwitchCase="'Input'">
+                    Input
+                    <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+                </div>
+                <div *ngSwitchCase="'Dropdown'">
+                    Dropdown
+                    <nz-select style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
+                        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+                        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+                        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+                    </nz-select>
+                </div>
+                <div *ngSwitchCase="'RadioGroup'">
+                    <nz-radio-group [(ngModel)]="radioValue">
+                    <label nz-radio nzValue="A">A</label>
+                    <label nz-radio nzValue="B">B</label>
+                    <label nz-radio nzValue="C">C</label>
+                    <label nz-radio nzValue="D">D</label>
+                    </nz-radio-group>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="config-box">
+          Name:
+        {{selectedConfig.name}}
+      </div>
+</div>

@@ -1,0 +1,44 @@
+.component-list-module {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    width: 400px;
+}
+.component-item{
+    padding:6px 10px;
+    border: 1px solid salmon;
+    cursor: move;
+}
+.view-background{
+    position: absolute;
+    z-index: 0;
+}
+
+.drag-box{
+    display: inline-block;
+    width: 400px;
+}
+.done-list{
+    border: 1px solid;
+    display: inline-block;
+    width: 600px;
+    padding: 10px;
+}
+.example-box{
+    margin: 5px 0;
+}
+.item-box{
+    padding: 8px;
+    cursor: move;
+    border: 1px dashed;
+}
+
+.selected-item{
+    background-color: antiquewhite;
+}
+
+.config-box{
+    margin-left: 100px;
+}
